@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – Profile</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="page-bg"
+      style="background-image: url(&quot;{{ url_for('static', filename='images/solo_leveling.jpeg') }}&quot;);">
+  <!-- Top bar -->
+  <header class="topbar">
+    <div>
+      <a href="{{ url_for('home') }}" style="font-weight:800;">AnimeFlix</a>
+      <span class="muted" style="font-size:0.85rem;margin-left:8px;">Profile</span>
+    </div>
+
+    <div class="nav-actions">
+      <a href="{{ url_for('home') }}" class="secondary"
+         style="padding:8px 14px;border-radius:8px;">
+        🏠 Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Main profile content -->
+  <main class="container">
+    <section id="profileWrap" class="profile-card">
+
+      <!-- Profile picture preview -->
+      <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:16px;">
+        <img id="profilePicPreview"
+             src="{{ user.profile_pic if user.profile_pic else url_for('static', filename='images/solo_leveling.jpeg') }}"
+             alt="Profile picture"
+             style="width:120px;height:120px;border-radius:50%;object-fit:cover;
+                    border:3px solid #7c3aed;box-shadow:0 0 16px rgba(124,58,237,0.7);">
+        <label for="profilePicUpload"
+               class="secondary"
+               style="margin-top:10px;padding:8px 14px;cursor:pointer;">
+          Change Profile Picture
+        </label>
+        <form method="POST"
+      action="/upload-profile-picture"
+      enctype="multipart/form-data">
+
+  <input type="file"
+         id="profilePicUpload"
+         name="profile_pic"
+         accept="image/*"
+         onchange="this.form.submit()"
+         style="display:none;">
+
+</form>
+      </div>
+
+      <h2 style="margin-bottom:10px;">Account</h2>
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Created:</strong> <span id="pCreated"></span></p>
+
+      <!-- Edit name/email -->
+             <form method="POST" action="/update-profile">
+
+  <input name="name"
+         value="{{ user.name }}">
+
+  <input name="email"
+         value="{{ user.email }}">
+
+  <button type="submit">
+    Save
+  </button>
+
+</form>
+      <!-- <div style="margin-top:14px;">
+        <button id="editBtn" class="secondary">Edit Profile</button>
+        <div id="editActions" style="display:none;margin-top:10px;">
+          <input id="editName" type="text" placeholder="New name" style="display:none;">
+          <input id="editEmail" type="email" placeholder="New email" style="display:none;">
+          <button id="saveEdit" class="primary" style="margin-top:8px;">Save</button>
+          <button id="cancelEdit" class="secondary" style="margin-top:8px;">Cancel</button>
+        </div>
+      </div>
+
+      <hr style="margin:20px 0;border-color:rgba(255,255,255,0.1);"> -->
+
+
+
+
+      <!-- Change password -->
+
+      <h3>Change Password</h3>
+
+<form method="POST"
+      action="/change-password"
+      style="margin-top:8px;">
+
+  <div class="passWrap">
+
+  <input type="password"
+         name="old_password"
+         placeholder="Old password"
+         required>
+
+  <span class="passToggle">
+    <i class="fa-solid fa-eye"></i>
+  </span>
+
+</div>
+
+<div class="passWrap">
+
+  <input type="password"
+         name="new_password"
+         placeholder="New password"
+         required>
+
+  <span class="passToggle">
+    <i class="fa-solid fa-eye"></i>
+  </span>
+
+</div>
+
+  <button type="submit"
+          class="primary"
+          style="margin-top:10px;">
+    Update Password
+  </button>
+
+</form>
+
+<button id="deleteAccountBtn"
+        class="secondary"
+        style="background:#8b0000;border-color:#ff4d4d;">
+
+  Delete Account
+
+</button>
+       </section>
+  </main>
+<div id="toast"></div>
+
+<div id="deleteModal" class="logout-modal">
+
+  <div class="logout-box">
+
+    <h2>Delete Account?</h2>
+
+    <p>
+      This action cannot be undone.
+      Your AnimeFlix account will be permanently deleted.
+    </p>
+
+    <div class="logout-actions">
+
+      <button id="cancelDelete"
+              class="secondary">
+
+        Cancel
+
+      </button>
+
+      <form method="POST"
+            action="/delete-account">
+
+        <button type="submit"
+                class="primary"
+                style="background:#dc2626;">
+
+          Delete
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% if error %}
+
+<script>
+
+window.addEventListener("load", () => {
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = "{{ error }}";
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  }, 3000);
+
+});
+
+</script>
+
+{% endif %}
+
+<script>
+
+const deleteBtn =
+  document.getElementById("deleteAccountBtn");
+
+const deleteModal =
+  document.getElementById("deleteModal");
+
+const cancelDelete =
+  document.getElementById("cancelDelete");
+
+deleteBtn.addEventListener("click", () => {
+
+  deleteModal.classList.add("show");
+
+});
+
+cancelDelete.addEventListener("click", () => {
+
+  deleteModal.classList.remove("show");
+
+});
+
+deleteModal.addEventListener("click", (e) => {
+
+  if (e.target === deleteModal) {
+
+    deleteModal.classList.remove("show");
+
+  }
+
+});
+
+document.addEventListener("keydown", (e) => {
+
+  if (e.key === "Escape") {
+
+    deleteModal.classList.remove("show");
+
+  }
+
+});
+
+</script>
+</body>
+</html>

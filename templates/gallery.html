@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – Gallery</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+<script>
+
+const FAVORITES = {{ favorites|tojson }};
+
+</script>
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+</head>
+<body id="galleryBody" class="page-bg" style="background-image:url('images/anime1.webp');">
+
+  <header class="topbar">
+    <a href="{{ url_for('home') }}" style="font-weight:800;">AnimeFlix</a>
+
+    <div class="nav-actions">
+      <input id="searchInput" class="search-bar" placeholder="Search anime...">
+
+      <!-- Filter button like HiAnime -->
+      <button id="filterToggle" class="secondary" style="margin-left:8px;">
+        Filter
+      </button>
+
+      <button id="themeToggleGallery" class="secondary">🌙</button>
+
+      <a href="{{ url_for('home') }}" class="secondary"
+         style="padding:8px 14px;border-radius:8px;">
+        🏠 Home
+      </a>
+      <a href="{{ url_for('dashboard') }}"
+   class="secondary"
+   style="padding:8px 14px;border-radius:8px;">
+
+   📊 Dashboard
+
+</a>
+
+
+    </div>
+  </header>
+
+  <!-- Filter overlay panel -->
+<section id="filterSection" class="filter-section">
+
+  <div class="filter-panel">
+
+    <!-- STATUS -->
+    <div class="filter-row">
+      <span class="filter-label">Status</span>
+
+      <div class="filter-options">
+        <button class="filter-pill active" data-status="all">
+          All
+        </button>
+
+        <button class="filter-pill" data-status="ongoing">
+          Ongoing
+        </button>
+
+        <button class="filter-pill" data-status="completed">
+          Completed
+        </button>
+      </div>
+    </div>
+
+    <!-- YEAR RANGE -->
+    <div class="filter-row">
+
+      <span class="filter-label">Year Range</span>
+
+      <div class="filter-options year-range">
+
+        <div>
+          <span class="mini-label">Start</span>
+
+          <input id="yearStart"
+                 type="number"
+                 placeholder="1990"
+                 min="1970"
+                 max="2100">
+        </div>
+
+        <div>
+          <span class="mini-label">End</span>
+
+          <input id="yearEnd"
+                 type="number"
+                 placeholder="2025"
+                 min="1970"
+                 max="2100">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SORT -->
+    <div class="filter-row">
+
+      <span class="filter-label">Sort</span>
+
+      <div class="filter-options">
+
+        <button class="filter-pill active"
+                data-sort="default">
+          Default
+        </button>
+
+        <button class="filter-pill"
+                data-sort="newest">
+          Newest
+        </button>
+
+        <button class="filter-pill"
+                data-sort="oldest">
+          Oldest
+        </button>
+
+        <button class="filter-pill"
+                data-sort="az">
+          A-Z
+        </button>
+
+      </div>
+    </div>
+
+    <!-- GENRES -->
+    <div class="filter-row">
+
+      <span class="filter-label">Genres</span>
+
+      <div class="filter-options filter-genres">
+
+        <button class="filter-chip" data-genre="action">
+          Action
+        </button>
+
+        <button class="filter-chip" data-genre="adventure">
+          Adventure
+        </button>
+
+        <button class="filter-chip" data-genre="comedy">
+          Comedy
+        </button>
+
+        <button class="filter-chip" data-genre="drama">
+          Drama
+        </button>
+
+        <button class="filter-chip" data-genre="fantasy">
+          Fantasy
+        </button>
+
+        <button class="filter-chip" data-genre="isekai">
+          Isekai
+        </button>
+
+        <button class="filter-chip" data-genre="magic">
+          Magic
+        </button>
+
+        <button class="filter-chip" data-genre="horror">
+          Horror
+        </button>
+
+        <button class="filter-chip" data-genre="psychological">
+          Psychological
+        </button>
+
+        <button class="filter-chip" data-genre="romance">
+          Romance
+        </button>
+
+        <button class="filter-chip" data-genre="sci-fi">
+          Sci-Fi
+        </button>
+
+        <button class="filter-chip" data-genre="mecha">
+          Mecha
+        </button>
+
+        <button class="filter-chip" data-genre="sports">
+          Sports
+        </button>
+
+        <button class="filter-chip" data-genre="slice of life">
+          Slice of Life
+        </button>
+
+        <button class="filter-chip" data-genre="supernatural">
+          Supernatural
+        </button>
+
+        <button class="filter-chip" data-genre="thriller">
+          Thriller
+        </button>
+
+        <button class="filter-chip" data-genre="shounen">
+          Shounen
+        </button>
+
+        <button class="filter-chip" data-genre="seinen">
+          Seinen
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="filter-actions">
+
+      <button id="filterReset"
+              class="secondary">
+        Reset
+      </button>
+
+      <button id="filterApply"
+              class="primary">
+        Apply Filter
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+  <main class="container">
+    <section>
+      <div id="gallery" class="grid">
+        <!-- cards via main.js -->
+      </div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+</body>
+</html>

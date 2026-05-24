@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>AnimeFlix Dashboard</title>
+
+  <link rel="stylesheet"
+        href="{{ url_for('static',
+        filename='css/main.css') }}">
+        <script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+
+</head>
+
+<body id="dashboardBody"
+      class="page-bg dashboard-page"
+      style="background-image:url('/static/images/anime1.webp');">
+
+<header class="topbar">
+
+  <a href="{{ url_for('home') }}"
+     style="font-weight:800;">
+
+     AnimeFlix
+
+  </a>
+  
+
+  <div class="nav-actions">
+    <button id="themeToggleDashboard" class="secondary">🌙</button>
+
+    <a href="{{ url_for('gallery') }}"
+       class="secondary">
+
+       🎬 Gallery
+
+    </a>
+
+      <div id="profileAvatar" class="profile-avatar">
+
+  <img id="avatarImg"
+
+       src="{{ user.profile_pic if user.profile_pic else url_for('static', filename='images/one piece.jpg') }}"
+
+       alt="Profile">
+
+</div>
+
+  </div>
+
+</header>
+
+<main class="container">
+
+  <!-- USER CARD -->
+
+  <section class="dashboard-user">
+
+    <div class="dashboard-avatar">
+
+      <img src="{{ user.profile_pic if user.profile_pic else url_for('static', filename='images/one piece.jpg') }}"
+           alt="Profile">
+
+    </div>
+
+    <div>
+
+      <h1>
+        Welcome,
+        {{ user.name }}
+      </h1>
+
+      <p class="muted">
+        {{ user.email }}
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- STATS -->
+
+  <section class="dashboard-stats">
+
+    <div class="dashboard-stat-card">
+
+      <h2>
+        {{ favorites|length }}
+      </h2>
+
+      <p>Favorites</p>
+
+    </div>
+
+    <div class="dashboard-stat-card">
+
+      <h2>0</h2>
+
+      <p>Wishlist</p>
+
+    </div>
+
+    <div class="dashboard-stat-card">
+
+      <h2>0</h2>
+
+      <p>History</p>
+
+    </div>
+
+  </section>
+
+  <!-- FAVORITES -->
+
+  <section class="dashboard-section">
+
+    <div class="dashboard-section-header">
+
+      <h2>❤️ Favorites</h2>
+
+    </div>
+
+    {% if favorites %}
+
+    <div class="grid">
+
+      {% for anime in favorites %}
+
+      <article class="card-thumb">
+
+  <div class="anime-card-actions">
+
+    <form method="POST"
+          action="/remove-favorite">
+
+      <input type="hidden"
+             name="favorite_id"
+             value="{{ anime[0] }}">
+
+      <button type="submit"
+              class="favorite-remove-btn">
+
+        ❌
+
+      </button>
+
+    </form>
+
+  </div>
+
+  <a href="{{ anime[3] }}"
+     target="_blank">
+
+    <img src="{{ anime[2] }}"
+         alt="{{ anime[1] }}">
+
+    <h3>{{ anime[1] }}</h3>
+
+  </a>
+
+</article>
+
+      {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-dashboard">
+
+      <h3>No favorites yet</h3>
+
+      <p>
+        Start adding anime from gallery.
+      </p>
+
+    </div>
+
+    {% endif %}
+
+  </section>
+
+  <section class="dashboard-section">
+
+  <div class="dashboard-section-header">
+
+    <h2>📌 Watchlist</h2>
+
+  </div>
+
+  {% if watchlist %}
+
+  <div class="grid">
+
+    {% for anime in watchlist %}
+
+    <article class="card-thumb">
+
+      <div class="anime-card-actions">
+
+        <form method="POST"
+              action="/remove-watchlist">
+
+          <input type="hidden"
+                 name="watchlist_id"
+                 value="{{ anime[0] }}">
+
+          <button type="submit"
+                  class="favorite-remove-btn">
+
+            ❌
+
+          </button>
+
+        </form>
+
+      </div>
+
+      <a href="{{ anime[3] }}"
+         target="_blank">
+
+        <img src="{{ anime[2] }}"
+             alt="{{ anime[1] }}">
+
+        <h3>{{ anime[1] }}</h3>
+
+      </a>
+
+    </article>
+
+    {% endfor %}
+
+  </div>
+
+  {% else %}
+
+  <div class="empty-dashboard">
+
+    <h3>No anime in watchlist</h3>
+
+    <p>
+      Add anime from gallery to watch later.
+    </p>
+
+  </div>
+
+  {% endif %}
+
+</section>
+
+{% if history and history|length > 0 %}
+
+<section class="dashboard-section">
+
+  <div class="dashboard-section-header">
+
+    <h2>▶ Continue Watching</h2>
+
+  </div>
+
+  <article class="continue-card">
+
+    <a href="{{ history[0][3] }}"
+       target="_blank">
+
+      <img src="{{ history[0][2] }}"
+           alt="{{ history[0][1] }}">
+
+      <div class="continue-overlay">
+
+        <h2>{{ history[0][1] }}</h2>
+
+        <p>
+          Continue where you left off
+        </p>
+
+      </div>
+
+    </a>
+
+  </article>
+
+</section>
+
+{% endif %}
+
+<section class="dashboard-section">
+
+  <div class="dashboard-section-header">
+
+    <h2>🕒 Watch History</h2>
+
+  </div>
+
+  {% if history %}
+
+  <div class="grid">
+
+    {% for anime in history %}
+
+    <article class="card-thumb">
+
+      <a href="{{ anime[3] }}"
+         target="_blank">
+
+        <img src="{{ anime[2] }}"
+             alt="{{ anime[1] }}">
+
+        <h3>{{ anime[1] }}</h3>
+
+      </a>
+
+    </article>
+
+    {% endfor %}
+
+  </div>
+
+  {% else %}
+
+  <div class="empty-dashboard">
+
+    <h3>No watch history</h3>
+
+    <p>
+      Start watching anime from gallery.
+    </p>
+
+  </div>
+
+  {% endif %}
+
+</section>
+
+</main>
+
+</body>
+</html>

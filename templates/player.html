@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – Player</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+</head>
+<body class="page-bg" style="background-color:#000;background-image:none;">
+  <header class="topbar">
+    <div>
+      <a href="{{ url_for('home') }}" style="font-weight:800;">AnimeFlix</a>
+      <span class="muted" style="font-size:0.85rem;margin-left:8px;">Player</span>
+    </div>
+    <div class="nav-actions">
+      <a href="{{ url_for('gallery') }}" class="secondary">Gallery</a>
+    </div>
+  </header>
+
+  <main class="player-wrap">
+    <h1 id="playerTitle" style="margin-bottom:10px;">Player</h1>
+    <video id="videoEl" controls></video>
+    <p style="margin-top:10px;font-size:0.9rem;">
+      Tip: you can manually set <code>localStorage.site_player_src</code> to a video URL in devtools to test.
+    </p>
+  </main>
+  <div id="toast"></div>
+</body>
+</html>

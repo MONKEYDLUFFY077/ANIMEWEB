@@ -1,0 +1,1346 @@
+/* main.css - AnimeFlix shared styles (flashy anime theme) */
+:root {
+  --red: #e50914;
+  --accent: #7c3aed;
+  --bg: #070707;
+  --muted: #cfcfcf;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+
+  min-height:100%;
+
+  margin:0;
+
+  padding:0;
+
+  font-family:'Inter', system-ui, Arial, sans-serif;
+
+  background:var(--bg);
+
+  color:#fff;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  background: linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,.4));
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(124,58,237,.08);
+}
+button {
+  cursor: pointer;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.primary {
+  background: linear-gradient(90deg, var(--red), #ff5b7a);
+  color: #fff;
+}
+.secondary {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+/* splash */
+body.splash{
+  background:#000;
+  overflow:hidden;
+}
+
+.introVideo{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:99999;
+}
+
+#toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#222;
+  padding:14px 20px;
+  border-radius:10px;
+  color:#fff;
+  font-weight:600;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(20px);
+  transition:all .4s ease;
+  z-index:9999999;
+}
+#toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+/* Pages with backgrounds */
+/* .page-bg {
+  min-height: 100vh;
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-attachment: fixed;
+
+  padding: 40px;
+} */
+
+.page-bg {
+
+  min-height:100vh;
+
+  width:100%;
+
+  background-size:cover;
+
+  background-position:center;
+
+  background-repeat:no-repeat;
+
+  background-attachment:scroll;
+
+  padding:40px;
+
+  overflow-x:hidden;
+}
+
+/* Form layout */
+.form-center {
+  max-width: 480px;
+  margin: 40px auto;
+  text-align: center;
+  animation: fadeUp .6s ease;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,0.03);
+  color: #fff;
+}
+input::placeholder {
+  color: #ddd;
+}
+
+/* Hero / home */
+.hero {
+  background: linear-gradient(180deg,rgba(4,4,6,.6),rgba(4,4,6,.3));
+  padding: 36px;
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+  animation: fadeUp .6s ease;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+.card-thumb {
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.15));
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card-thumb img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+.card-thumb:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(124,58,237,.12);
+}
+.card-thumb:hover img {
+  transform: scale(1.06);
+  filter: drop-shadow(0 8px 24px rgba(124,58,237,.15));
+}
+.card-thumb h3 {
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+}
+
+/* Player */
+.player-wrap {
+  max-width: 1100px;
+  margin: 24px auto;
+}
+video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: #000;
+}
+
+/* Profile */
+.profile-card {
+  max-width:700px;
+  margin:40px auto 80px;
+  padding:20px;
+  border-radius:12px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.35)
+    );
+  backdrop-filter:blur(10px);
+}
+
+.passWrap{
+  position:relative;
+}
+
+.passWrap .passToggle{
+
+  position:absolute;
+
+  right:14px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  cursor:pointer;
+
+  user-select:none;
+
+  opacity:.75;
+
+  font-size:12px;
+
+  color:#ddd;
+
+  transition:.25s ease;
+}
+
+.passWrap .passToggle:hover{
+
+  opacity:1;
+
+  color:#fff;
+}
+
+
+/* OTP inputs */
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+.otp-field {
+  width: 48px;
+  height: 54px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,0.03);
+  color: #fff;
+}
+
+/* === THEME SYSTEM === */
+body.light {
+  background: #f3f4f6;
+  color: #111;
+}
+body.light .card {
+  background: linear-gradient(180deg,rgba(255,255,255,0.8),rgba(255,255,255,0.6));
+  color: #111;
+}
+body.light .primary {
+  background: linear-gradient(90deg,#e50914,#7c3aed);
+  color: #fff;
+}
+body.light .secondary {
+  background: rgba(0,0,0,0.05);
+  color: #111;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+body.light .muted {
+  color: #333;
+}
+
+/* === TOP BAR === */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+body.light .topbar {
+  background: rgba(255,255,255,0.8);
+}
+
+/* === PROFILE AVATAR === */
+.profile-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #7c3aed;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-avatar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(124,58,237,0.6);
+}
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* === Smooth Theme Transition & Toggle Animation === */
+body, .card, .topbar, .hero, .container {
+  transition: background 0.6s ease, color 0.6s ease, box-shadow 0.6s ease, filter 0.6s ease;
+}
+/* Theme toggle button (home + gallery + dashboard) */
+#themeToggle,
+#themeToggleGallery,
+#themeToggleDashboard {
+  font-size: 18px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Spin effect when toggling theme */
+#themeToggle.toggle-spin,
+#themeToggleGallery.toggle-spin,
+#themeToggleDashboard.toggle-spin {
+  transform: rotate(360deg);
+  box-shadow: 0 0 10px rgba(124,58,237,0.5), 0 0 20px rgba(229,9,20,0.3);
+}
+/* Fade overlay when switching theme */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+body.theme-fade::after {
+  opacity: 1;
+}
+
+/* responsive */
+@media (max-width: 600px) {
+  .card-thumb img { height: 150px; }
+  .logoN { font-size: 120px; }
+}
+
+/* === Gallery Theme Support === */
+body.light .page-bg {
+  background-color: #f8f9fa;
+  background-blend-mode: lighten;
+}
+body.light .card-thumb {
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(240,240,240,0.7));
+  color: #111;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+body.light .card-thumb h3 {
+  color: #000;
+}
+body.light .card-thumb:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* === Anime Gallery Glow Effects === */
+.card-thumb {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.4s ease, filter 0.4s ease;
+}
+.card-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ===== Gallery Filter Overlay ===== */
+/* ===== DROPDOWN FILTER SECTION ===== */
+
+.filter-section{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(-10px);
+  transition:
+    max-height 0.45s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.filter-section.open{
+  max-height:1200px;
+  opacity:1;
+  transform:translateY(0);
+}
+
+.filter-panel{
+  margin:18px auto 8px;
+  max-width:1100px;
+  padding:22px;
+  border-radius:20px;
+
+  background:rgba(10,10,14,0.72);
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(255,255,255,0.06);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.45),
+    0 0 20px rgba(124,58,237,0.08);
+
+  animation:filterFade 0.35s ease;
+}
+
+@keyframes filterFade{
+  from{
+    opacity:0;
+    transform:translateY(-12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* LIGHT MODE */
+
+body.light .filter-panel{
+  background:rgba(255,255,255,0.88);
+  color:#111;
+
+  border:1px solid rgba(0,0,0,0.06);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+}
+body.light .filter-panel{
+  background:#f9fafb;
+  color:#111;                 /* 🔥 black text in light theme */
+}
+
+.filter-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+.filter-header h2{
+  font-size:1.2rem;
+}
+.filter-header .small{
+  padding:6px 10px;
+  font-size:0.85rem;
+}
+
+.filter-row{
+  margin-top:14px;
+}
+.filter-label{
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+  opacity:0.9;
+  color:#fff;                 /* 🔥 dark mode label text */
+}
+body.light .filter-label{
+  color:#111;                 /* 🔥 light mode label text */
+}
+
+.filter-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.filter-row{
+  margin-top:18px;
+}
+/* Pills (status / sort) */
+.filter-pill{
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.04);
+  font-size:0.85rem;
+  cursor:pointer;
+  color:#fff;                 /* 🔥 pill text in dark theme */
+}
+.filter-pill.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+body.light .filter-pill{
+  border-color:rgba(0,0,0,0.12);
+  background:rgba(255,255,255,0.9);
+  color:#111;                 /* 🔥 pill text in light theme */
+}
+body.light .filter-pill.active{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+}
+
+/* Year range inputs */
+.year-range{
+  gap:18px;
+}
+.year-range input{
+  width:110px;
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.25);
+  background:rgba(0,0,0,0.25);
+  color:#fff;                 /* 🔥 input text in dark mode */
+}
+.mini-label{
+  font-size:0.75rem;
+  opacity:0.8;
+  color:#fff;                 /* 🔥 input label text in dark mode */
+}
+body.light .year-range input{
+  background:#fff;
+  color:#111;                 /* 🔥 input text in light mode */
+  border-color:rgba(0,0,0,0.15);
+}
+body.light .mini-label{
+  color:#555;
+}
+
+/* Genre chips */
+.filter-genres{
+  margin-top:4px;
+}
+.filter-chip{
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.16);
+  background:rgba(255,255,255,0.03);
+  font-size:0.8rem;
+  cursor:pointer;
+  color:#fff;                 /* 🔥 chip text in dark mode */
+}
+.filter-chip.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+body.light .filter-chip{
+  background:#fff;
+  border-color:rgba(0,0,0,0.12);
+  color:#111;                 /* 🔥 chip text in light mode */
+}
+body.light .filter-chip.active{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+}
+
+.filter-actions{
+  margin-top:22px;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+/* Dark mode glow */
+body:not(.light) .card-thumb:hover::after {
+  box-shadow: 0 0 20px rgba(124,58,237,0.5), 0 0 40px rgba(124,58,237,0.3);
+  opacity: 1;
+}
+
+/* Light mode glow */
+body.light .card-thumb:hover::after {
+  box-shadow: 0 0 20px rgba(229,9,20,0.5), 0 0 40px rgba(229,9,20,0.3);
+  opacity: 1;
+}
+
+/* Image hover lift */
+.card-thumb:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+
+/* === Gallery Section Titles === */
+.section-title {
+  font-size: 1.6rem;
+  margin: 30px 0 12px;
+  text-shadow: 0 0 6px rgba(229,9,20,0.3);
+}
+body.light .section-title {
+  color: #111;
+  text-shadow: none;
+}
+
+/* === Search Bar Styling === */
+.search-bar {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  outline: none;
+  width: 220px;
+  transition: all 0.3s ease;
+}
+.search-bar::placeholder {
+  color: #ccc;
+}
+.search-bar:focus {
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 0 10px rgba(124,58,237,0.5);
+}
+body.light .search-bar {
+  background: rgba(0,0,0,0.05);
+  color: #111;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+body.light .search-bar:focus {
+  box-shadow: 0 0 10px rgba(229,9,20,0.3);
+}
+
+
+/* === FORCE-BACKGROUND / CARDS to LIGHT MODE (fix scrolling issue) === */
+html.light body.page-bg,
+body.light.page-bg,
+.page-bg.light,
+body.light .page-bg {
+  background-attachment: scroll !important;
+  background-blend-mode: lighten !important;
+  background-color: #f8f9fa !important;
+  background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), var(--page-bg-image, none);
+  background-size: cover;
+  background-position: center;
+}
+body.light .container .card-thumb,
+html.light body .container .card-thumb,
+.page-bg.light .container .card-thumb {
+  background: linear-gradient(180deg, #ffffff, #f7f7f7) !important;
+  color: #111 !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+}
+body.light .card-thumb h3,
+.page-bg.light .card-thumb h3 {
+  color: #111 !important;
+}
+body.light .container,
+.page-bg.light .container,
+html.light body .container {
+  color: #111 !important;
+}
+body.light .topbar,
+html.light body .topbar {
+  background: rgba(255,255,255,0.85) !important;
+  color: #111 !important;
+}
+body.light .search-bar {
+  background: rgba(0,0,0,0.05) !important;
+  color: #111 !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+}
+body.light .card-thumb img,
+.page-bg.light .card-thumb img {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+
+/* Logout Modal */
+
+.logout-modal{
+
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.65);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:.3s ease;
+
+  z-index:99999;
+}
+
+.logout-modal.show{
+
+  opacity:1;
+  pointer-events:auto;
+}
+
+.logout-box{
+
+  width:90%;
+  max-width:420px;
+
+  background:rgba(15,15,20,.96);
+
+  border-radius:20px;
+
+  padding:28px;
+
+  text-align:center;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.5),
+    0 0 20px rgba(124,58,237,.15);
+
+  transform:translateY(20px);
+
+  transition:.3s ease;
+}
+
+.logout-modal.show .logout-box{
+
+  transform:translateY(0);
+}
+
+.logout-box h2{
+
+  margin-bottom:10px;
+}
+
+.logout-box p{
+
+  opacity:.85;
+  margin-bottom:22px;
+}
+
+.logout-actions{
+
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+/* LIGHT THEME LOGOUT MODAL */
+
+body.light .logout-box{
+
+  background:#ffffff;
+
+  color:#111;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.12);
+
+}
+
+body.light .logout-box p{
+
+  color:#444;
+}
+
+body.light .logout-box .secondary{
+
+  background:#f3f4f6;
+
+  color:#111;
+
+  border:1px solid rgba(0,0,0,.08);
+}
+
+body.light .logout-box .secondary:hover{
+
+  background:#e5e7eb;
+}
+
+/* ===== VALIDATION ===== */
+
+.fieldError{
+  display:block;
+  text-align:left;
+  margin-top:-4px;
+  margin-bottom:8px;
+  color:#ff4d6d;
+  font-size:.82rem;
+  min-height:18px;
+}
+
+.inputError{
+  border:1px solid #ff4d6d !important;
+  box-shadow:0 0 10px rgba(255,77,109,.25);
+}
+
+.inputSuccess{
+  border:1px solid #22c55e !important;
+  box-shadow:0 0 10px rgba(34,197,94,.2);
+}
+
+/* password strength */
+
+.passwordStrength{
+  width:100%;
+  height:6px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,.08);
+  margin-top:6px;
+  margin-bottom:10px;
+}
+
+#strengthBar{
+  height:100%;
+  width:0%;
+  transition:.3s ease;
+  border-radius:999px;
+}
+
+/* ===== DASHBOARD ===== */
+
+.dashboard-user{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+
+  padding:24px;
+
+  border-radius:18px;
+
+  background:rgba(0,0,0,.45);
+
+  backdrop-filter:blur(10px);
+
+  margin-bottom:28px;
+}
+
+.dashboard-avatar{
+
+  width:90px;
+
+  height:90px;
+
+  border-radius:50%;
+
+  overflow:hidden;
+
+  border:3px solid var(--accent);
+}
+
+.dashboard-avatar img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+}
+
+.dashboard-stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(200px,1fr));
+
+  gap:18px;
+
+  margin-bottom:30px;
+}
+
+.dashboard-stat-card{
+
+  padding:24px;
+
+  border-radius:16px;
+
+  background:rgba(0,0,0,.4);
+
+  text-align:center;
+
+  backdrop-filter:blur(10px);
+}
+
+.dashboard-stat-card h2{
+
+  font-size:2rem;
+
+  margin-bottom:8px;
+}
+
+.dashboard-section{
+
+  margin-top:20px;
+}
+
+.dashboard-section-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:16px;
+}
+
+.empty-dashboard{
+
+  padding:40px;
+
+  text-align:center;
+
+  border-radius:16px;
+
+  background:rgba(0,0,0,.35);
+}
+
+body.light .dashboard-user,
+body.light .dashboard-stat-card,
+body.light .empty-dashboard{
+
+  background:rgba(255,255,255,.75);
+
+  color:#111;
+}
+
+/* ===== FAVORITE BUTTON ===== */
+
+.card-thumb{
+  position:relative;
+}
+
+.anime-card-actions{
+
+  position:absolute;
+
+  top:10px;
+
+  right:10px;
+
+  z-index:20;
+}
+
+.favorite-btn{
+
+  width:42px;
+
+  height:42px;
+
+  border-radius:50%;
+
+  border:none;
+
+  background:rgba(0,0,0,.65);
+
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+
+  font-size:1.1rem;
+
+  cursor:pointer;
+
+  transition:.25s ease;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+}
+
+.favorite-btn:hover{
+
+  transform:scale(1.12);
+
+  background:var(--red);
+
+  box-shadow:
+    0 0 16px rgba(229,9,20,.45);
+}
+
+body.light .favorite-btn{
+
+  background:rgba(255,255,255,.85);
+
+  color:#111;
+}
+
+body.light .favorite-btn:hover{
+
+  color:#fff;
+}
+
+/* ===== REMOVE FAVORITE ===== */
+
+.favorite-remove-btn{
+
+  width:42px;
+
+  height:42px;
+
+  border-radius:50%;
+
+  border:none;
+
+  background:rgba(0,0,0,.7);
+
+  color:#fff;
+
+  font-size:1rem;
+
+  cursor:pointer;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  transition:.25s ease;
+}
+
+.favorite-remove-btn:hover{
+
+  transform:scale(1.1);
+
+  background:#dc2626;
+
+  box-shadow:
+    0 0 18px rgba(220,38,38,.45);
+}
+
+body.light .favorite-remove-btn{
+
+  background:rgba(255,255,255,.9);
+
+  color:#111;
+}
+
+body.light .favorite-remove-btn:hover{
+
+  color:#fff;
+}
+
+/* ===== WATCHLIST ===== */
+
+.watchlist-btn{
+
+  width:42px;
+
+  height:42px;
+
+  border-radius:50%;
+
+  border:none;
+
+  background:rgba(0,0,0,.65);
+
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+
+  font-size:1rem;
+
+  cursor:pointer;
+
+  transition:.25s ease;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  margin-top:10px;
+}
+
+.watchlist-btn:hover{
+
+  transform:scale(1.12);
+
+  background:#2563eb;
+
+  box-shadow:
+    0 0 18px rgba(37,99,235,.45);
+}
+
+body.light .watchlist-btn{
+
+  background:rgba(255,255,255,.9);
+
+  color:#111;
+}
+
+body.light .watchlist-btn:hover{
+
+  color:#fff;
+}
+
+/* ===== CONTINUE WATCHING ===== */
+
+.continue-card{
+
+  position:relative;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  margin-bottom:28px;
+
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.35);
+}
+
+.continue-card img{
+
+  width:100%;
+
+  height:340px;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+.continue-overlay{
+
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-end;
+
+  padding:30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(0,0,0,.82)
+    );
+}
+
+.continue-overlay h2{
+
+  font-size:2rem;
+
+  margin-bottom:10px;
+}
+
+.continue-overlay p{
+
+  opacity:.9;
+}
+
+.anime-card-actions{
+  position:absolute;
+  top:10px;
+  right:10px;
+
+  display:flex;
+  gap:8px;
+
+  opacity:0;
+  transform:translateY(-10px);
+
+  transition:all .25s ease;
+
+  z-index:20;
+}
+
+.card-thumb:hover .anime-card-actions{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.favorite-btn,
+.watchlist-btn{
+  width:42px;
+  height:42px;
+
+  border-radius:50%;
+  border:none;
+
+  background:rgba(0,0,0,.72);
+  color:#fff;
+
+  backdrop-filter:blur(6px);
+
+  font-size:18px;
+  cursor:pointer;
+
+  transition:.25s ease;
+}
+
+.favorite-btn:hover{
+  background:#e50914;
+  transform:scale(1.1);
+}
+
+.watchlist-btn:hover{
+  background:#7c3aed;
+  transform:scale(1.1);
+}
+/* active favorite */
+.active-favorite{
+  opacity:1 !important;
+  background:#e50914 !important;
+  color:#fff !important;
+
+  transform:scale(1.08);
+  box-shadow:
+    0 0 16px rgba(229,9,20,.55);
+}
+
+.card-thumb:hover .active-favorite{
+  opacity:1 !important;
+}/* =========================
+   DASHBOARD LIGHT MODE FIX
+========================= */
+
+body.light.dashboard-page{
+  background-color:#f3f4f6 !important;
+  color:#111 !important;
+}
+
+/* User card */
+body.light .dashboard-user{
+  background:rgba(255,255,255,0.88) !important;
+  color:#111 !important;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.08);
+}
+
+/* Dashboard stat cards */
+body.light .dashboard-stat-card{
+  background:#ffffff !important;
+  color:#111 !important;
+
+  border:1px solid rgba(0,0,0,.08);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.06);
+}
+
+/* Section containers */
+body.light .dashboard-section{
+  background:rgba(255,255,255,.82) !important;
+
+  color:#111 !important;
+
+  border:1px solid rgba(0,0,0,.08);
+}
+
+/* Section titles */
+body.light .dashboard-section h2,
+body.light .dashboard-section h3,
+body.light .dashboard-user h1,
+body.light .dashboard-user p{
+  color:#111 !important;
+}
+
+/* Empty cards */
+body.light .empty-dashboard{
+  background:#fff !important;
+  color:#111 !important;
+
+  border:1px solid rgba(0,0,0,.08);
+}
+
+/* Continue watching card */
+body.light .continue-card{
+  background:#fff !important;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+/* Anime cards */
+body.light .card-thumb{
+  background:#fff !important;
+  color:#111 !important;
+
+  border:1px solid rgba(0,0,0,.08);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.06);
+}
+
+body.light .card-thumb h3{
+  color:#111 !important;
+}
+
+/* Topbar */
+body.light .topbar{
+  background:rgba(255,255,255,.88) !important;
+  color:#111 !important;
+}
+
+/* Buttons */
+body.light .secondary{
+  background:#f3f4f6 !important;
+  color:#111 !important;
+  border:1px solid rgba(0,0,0,.08);
+}

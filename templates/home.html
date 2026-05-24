@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – Home</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+</head>
+<body id="homeBody" class="page-bg" style="background-image:url('/static/images/netflix.jpg');">
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-weight:800;font-size:1.2rem;">AnimeFlix</span>
+      <span class="muted" style="font-size:0.85rem;">stream your favourite anime</span>
+    </div>
+    <div class="nav-actions">
+      <button id="themeToggle" class="secondary">🌙</button>
+      <button id="signoutBtn" class="secondary">
+  Logout
+</button>
+      <div id="profileAvatar" class="profile-avatar">
+
+  <img id="avatarImg"
+
+       src="{{ user.profile_pic if user.profile_pic else url_for('static', filename='images/one piece.jpg') }}"
+
+       alt="Profile">
+
+</div>
+
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Welcome to AnimeFlix</h1>
+      <p style="margin-top:8px;">Continue watching or explore new worlds.</p>
+      <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+        <a href="{{ url_for('gallery') }}"><button class="primary">Browse Anime Gallery</button></a>
+        <!-- <a href="{{ url_for('player') }}"><button class="secondary">Open Player</button></a> -->
+      </div>
+    </section>
+  </main>
+  <div id="logoutModal" class="logout-modal">
+
+  <div class="logout-box">
+
+    <h2>Logout?</h2>
+
+    <p>Are you sure you want to logout from AnimeFlix?</p>
+
+    <div class="logout-actions">
+
+      <button id="cancelLogout" class="secondary">
+        Cancel
+      </button>
+
+      <button id="confirmLogout" class="primary">
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+  <div id="toast"></div>
+  <script>
+
+const signoutBtn = document.getElementById("signoutBtn");
+
+const logoutModal = document.getElementById("logoutModal");
+
+const cancelLogout = document.getElementById("cancelLogout");
+
+const confirmLogout = document.getElementById("confirmLogout");
+
+signoutBtn.addEventListener("click", () => {
+
+  logoutModal.classList.add("show");
+
+});
+
+cancelLogout.addEventListener("click", () => {
+
+  logoutModal.classList.remove("show");
+
+});
+
+logoutModal.addEventListener("click", (e) => {
+
+  if (e.target === logoutModal) {
+
+    logoutModal.classList.remove("show");
+
+  }
+
+});
+
+confirmLogout.addEventListener("click", () => {
+
+  window.location.href = "/logout";
+
+});
+
+document.addEventListener("keydown", (e) => {
+
+  if (e.key === "Escape") {
+
+    logoutModal.classList.remove("show");
+
+  }
+
+});
+
+</script>
+</body>
+</html>

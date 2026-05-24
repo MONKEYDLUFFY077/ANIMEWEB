@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – Splash</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+</head>
+
+<body class="splash">
+  <video 
+    id="introVideo"
+    autoplay
+    muted
+    playsinline
+    class="introVideo"
+  >
+    <source src="images/netflix_intro.mp4" type="video/mp4">
+  </video>
+</body>
+
+</html>

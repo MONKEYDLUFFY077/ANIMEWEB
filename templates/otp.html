@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – OTP Verify</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+</head>
+<body class="page-bg" style="background-image:url(&quot;{{ url_for('static', filename='images/demonslayer.webp') }}&quot;);">
+  <div class="container form-center">
+    <h1>Enter OTP</h1>
+    <p>Type the 6-digit OTP you generated.</p>
+    <div class="card">
+      <form method="POST" action="/otp">
+
+  <div class="otp-inputs">
+
+  <input maxlength="1" class="otp-field" type="text" required>
+  <input maxlength="1" class="otp-field" type="text" required>
+  <input maxlength="1" class="otp-field" type="text" required>
+  <input maxlength="1" class="otp-field" type="text" required>
+  <input maxlength="1" class="otp-field" type="text" required>
+  <input maxlength="1" class="otp-field" type="text" required>
+
+</div>
+
+<input type="hidden" name="otp" id="finalOtp" required>
+
+<input type="hidden" name="otp" id="finalOtp">
+
+  <button type="submit"
+          class="primary"
+          style="width:100%;margin-top:10px;">
+
+    Verify OTP
+
+  </button>
+
+</form>
+    </div>
+    <p style="margin-top:16px;">
+      <a href="{{ url_for('forgot') }}">Back to generate OTP</a>
+    </p>
+  </div>
+  <div id="toast"></div>
+<script>
+
+const form = document.querySelector("form");
+
+const otpFields = document.querySelectorAll(".otp-field");
+
+const finalOtp = document.getElementById("finalOtp");
+
+otpFields.forEach((field, index) => {
+
+  field.addEventListener("input", () => {
+
+    field.value = field.value.replace(/[^0-9]/g, "");
+
+    if (field.value && index < otpFields.length - 1) {
+      otpFields[index + 1].focus();
+    }
+
+    updateOTP();
+
+  });
+
+  field.addEventListener("keydown", (e) => {
+
+    if (e.key === "Backspace" && !field.value && index > 0) {
+      otpFields[index - 1].focus();
+    }
+
+  });
+
+});
+
+function updateOTP() {
+
+  let otp = "";
+
+  otpFields.forEach(field => {
+    otp += field.value;
+  });
+
+  finalOtp.value = otp;
+
+}
+
+form.addEventListener("submit", () => {
+  updateOTP();
+});
+
+</script>
+{% if error %}
+
+<script>
+
+window.addEventListener("load", () => {
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = "{{ error }}";
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+
+});
+
+</script>
+
+{% endif %}
+</body>
+</html>

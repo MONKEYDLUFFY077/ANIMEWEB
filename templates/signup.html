@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – Sign Up</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+  <body class="page-bg" style="background-image:url('static/images/netflix.jpg');">
+  <div class="container form-center">
+    <h1 style="margin-bottom:12px;">Create your AnimeFlix account</h1>
+    <div class="card">
+      {% if error %}
+
+<div class="error-box">
+
+  {{ error }}
+
+</div>
+
+{% endif %}
+      <form method="POST" action="/signup">
+        <input id="signupName"
+       name="name"
+       type="text"
+       placeholder="Full name"
+       required>
+
+<small class="fieldError"></small>
+
+<input id="signupEmail"
+       name="email"
+       type="email"
+       placeholder="Email"
+       required>
+
+<small class="fieldError"></small>
+
+<div class="passWrap">
+
+  <input id="signupPassword"
+         name="password"
+         type="password"
+         placeholder="Password (min 6 chars)"
+         required>
+
+  <span class="passToggle">
+    <i class="fa-solid fa-eye"></i>
+  </span>
+
+</div>
+
+<div class="passwordStrength">
+  <div id="strengthBar"></div>
+</div>
+
+<small class="fieldError"></small>
+        <!-- <input name="first" type="text" placeholder="First name">
+        <input name="last" type="text" placeholder="Last name">
+        <input name="email" type="email" placeholder="Email"> -->
+        <!-- <input name="password" type="password" placeholder="Password (min 6 chars)"> -->
+         <!-- <div class="passWrap">
+  <input name="password" type="password" placeholder="Password (min 6 chars)"> -->
+  <!-- <span class="passToggle">👁</span> -->
+
+        <button type="submit" class="primary" style="width:100%;margin-top:8px;">Sign Up</button>
+      </form>
+      <p style="margin-top:12px;font-size:0.9rem;">
+        Already have an account?
+        <a href="{{ url_for('login') }}">Sign in</a>
+      </p>
+    </div>
+  </div>
+  <div id="toast"></div>
+</body>
+</html>

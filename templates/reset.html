@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reset Password</title>
+ <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="page-bg"
+      style="background-image: url(&quot;{{ url_for('static', filename='images/demonslayer.webp') }}&quot;);">
+  <header class="topbar">
+    <a href="{{ url_for('login') }}" style="font-weight:800;">AnimeFlix</a>
+  </header>
+
+  <main class="container">
+    <section class="card form-center">
+      <h2>Set New Password</h2>
+        <form method="POST"
+      action="/reset"
+      style="margin-top:18px;">
+
+  <div class="passWrap">
+
+    <input type="password"
+           name="password"
+           placeholder="New password"
+           required>
+
+    <span class="passToggle">
+      <i class="fa-solid fa-eye"></i>
+    </span>
+
+  </div>
+
+  <button class="primary"
+          style="margin-top:14px;">
+
+    Save
+
+  </button>
+
+</form>
+      <!-- <form id="resetPwdForm" style="margin-top:18px;">
+<div class="passWrap">
+  <input id="newPwd" type="password" placeholder="New password">
+  <span class="passToggle">👁</span>
+</div>
+
+<div class="passWrap">
+  <input id="confirmPwd" type="password" placeholder="Confirm password">
+  <span class="passToggle">👁</span>
+</div>
+
+        <button class="primary" style="margin-top:14px;">Save</button>
+      </form> -->
+    </section>
+  </main>
+
+  <div id="toast"></div>
+</body>
+</html>

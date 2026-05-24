@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – Forgot Password</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+</head>
+<body class="page-bg"
+      style="background-image:url(&quot;{{ url_for('static', filename='images/demonslayer.webp') }}&quot;);">
+        <div class="container form-center">
+    <h1>Forgot Password</h1>
+    <p style="margin-bottom:8px;">Enter your email or name to generate a demo OTP.</p>
+
+    <div class="card">
+
+      <form method="POST" action="/forgot">
+        <input name="email"
+       type="email"
+       placeholder="Enter your email"
+       required>
+        <button type="submit" class="primary" style="width:100%;margin-top:8px;">Generate OTP</button>
+      </form>
+
+      <!-- buttons appear AFTER generate -->
+      <!-- <div id="afterOtpBtns" style="display:none;margin-top:16px;text-align:center;">
+        <button id="showOtpBtn" class="secondary" style="margin-bottom:10px;">Show OTP</button>
+        <button id="gotoOtp" class="primary">Go to OTP Page</button>
+      </div> -->
+
+      <!-- reveal OTP -->
+      <!-- <div id="otpContainer" style="display:none;margin-top:16px;text-align:center;">
+        <p>Your demo OTP:</p>
+        <div id="otpCode" style="font-size:1.8rem;font-weight:700;margin-top:4px;"></div>
+        <p style="margin-top:12px;">
+          Or click:
+          <a href="{{ url_for('otp') }}">Go to OTP Verify</a>
+        </p>
+      </div>
+
+    </div> -->
+
+    <p style="margin-top:16px;">
+      <a href="{{ url_for('login') }}">Back to login</a>
+    </p>
+  </div>
+  <div id="toast"></div>
+  {% if error %}
+
+<script>
+
+window.addEventListener("load", () => {
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = "{{ error }}";
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  }, 3000);
+
+});
+
+</script>
+
+{% endif %}
+</body>
+</html>

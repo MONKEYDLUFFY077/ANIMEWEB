@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AnimeFlix – Login</title>
+  <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<script defer
+        src="{{ url_for('static', filename='js/main.js') }}">
+</script>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="page-bg" style="background-image:url('static/images/netflix.jpg');">
+  <div class="container form-center">
+    <h1 style="margin-bottom:12px;">AnimeFlix</h1>
+    <p style="margin-bottom:16px;">Sign in to continue</p>
+    <div class="card">
+      <form method="POST" action="/login">
+       <input id="loginIdentifier"
+       name="identifier"
+       type="text"
+       placeholder="Email or Name"
+       required>
+
+<small class="fieldError"></small>
+        <!-- <input id="password" type="password" placeholder="Password" autocomplete="current-password"> -->
+        <div class="passWrap">
+
+  <input id="loginPassword"
+         name="password"
+         type="password"
+         placeholder="Password"
+         required>
+
+  <span class="passToggle">
+    <i class="fa-solid fa-eye"></i>
+  </span>
+
+</div>
+
+<small class="fieldError"></small>
+
+        <button type="submit" class="primary" style="width:100%;margin-top:8px;">Sign In</button>
+      </form>
+      <div style="margin-top:12px; display:flex; justify-content:space-between; font-size:0.9rem;">
+        <a href="{{ url_for('forgot') }}">Forgot password?</a>
+        <a href="{{ url_for('signup') }}">New here? Sign up</a>
+      </div>
+    </div>
+  </div>
+  <div id="toast"></div>
+  {% if error %}
+
+<script>
+
+window.addEventListener("load", () => {
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = "{{ error }}";
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+
+});
+
+</script>
+
+{% endif %}
+</body>
+</html>
